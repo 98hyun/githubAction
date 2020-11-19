@@ -1,0 +1,35 @@
+# name 맘대로.
+name: yes24
+# on 최초 1회 push
+on:
+  push:
+    branches: [ master ]
+# 후 commit push 
+# on:
+#   schedule:
+#     - cron: '0 0 20 * *'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    # job 의 steps 
+    steps:
+    # 1. checkout 일단 하자.
+    - uses: actions/checkout@v2
+    # 2. python set up 
+    - name: set up python
+      uses: actions/setup-python@v2
+      with:
+        python-version : 3.8
+    # 3. install dependencies
+    - name: install dependencies
+      run: |
+        python -m pip install --upgrade pip
+      # 뜻은 모른다. 
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+    # 4. run
+    - name: run .py
+      run: |
+        python crawl.py
+      # secrets 생성.
+      env:
+        MY_GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
