@@ -1,13 +1,13 @@
 # name 맘대로.
 name: yes24
 # on 최초 1회 push
-on:
-  push:
-    branches: [ master ]
-# 후 commit push 
 # on:
-#   schedule:
-#     - cron: '0 0 20 * *'
+#   push:
+#     branches: [ master ]
+# 후 commit push 
+on:
+  schedule:
+    - cron: '0 0 20 * *'
 jobs:
   build:
     runs-on: ubuntu-latest
